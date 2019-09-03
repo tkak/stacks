@@ -1,10 +1,6 @@
-FROM ubuntu:bionic AS builder
+FROM cloudfoundry/build:base-cnb AS builder
 
 ARG PACKAGE_LIST=packagelist
-
-
-RUN apt-get update && \
-  apt-get install -y xz-utils binutils
 
 ADD install-certs.sh .
 ADD download-and-install-package.sh .
@@ -24,6 +20,6 @@ RUN rm /tiny/etc/os-release
 ADD files/os-release /tiny/etc/os-release
 RUN echo "" > /tiny/var/lib/dpkg/status
 
-FROM scratch 
+FROM scratch
 
 COPY --from=builder /tiny/ /
