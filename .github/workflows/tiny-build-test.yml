@@ -107,8 +107,9 @@ jobs:
         cnb_run_sha="$(docker inspect --format='{{index .RepoDigests 0}}' "${CNB_BUILD_TAG}")"
         cnb_build_sha="$(docker inspect --format='{{index .RepoDigests 0}}' "${CNB_RUN_TAG}")"
 
-        curl -XPOST -u "<user>:<token>" \
+        curl -XPOST \
+          -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           -H "Accept: application/vnd.github.everest-preview+json" \
           -H "Content-Type: application/json" \
           --data '{"event_type": "stack-commit", "client_payload": {"data": {"base_run_image": "${base_run_sha}", "cnb_run_image": "${cnb_run_sha}", "cnb_build_image": "${cnb_build_sha}"}}}' \
-          https://api.github.com/repos/\paketo-buildpacks/tiny-release/dispatches
+          https://api.github.com/repos/paketo-buildpacks/tiny-release/dispatches
