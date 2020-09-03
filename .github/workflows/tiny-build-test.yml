@@ -10,7 +10,7 @@ on:
     - 'bionic/cnb/build/Dockerfile'
 
 env:
-  BASE_RUN_TAG: gcr.io/cf-buildpacks-releng/build-rc:${{ github.sha }}-tiny
+  BASE_RUN_TAG: gcr.io/cf-buildpacks-releng/run-rc:${{ github.sha }}-tiny
   CNB_BUILD_TAG: gcr.io/cf-buildpacks-releng/build-rc:${{ github.sha }}-tiny-cnb
   CNB_RUN_TAG: gcr.io/cf-buildpacks-releng/run-rc:${{ github.sha }}-tiny-cnb
   STACK_ID: io.paketo.stacks.tiny
